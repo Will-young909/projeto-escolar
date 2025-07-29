@@ -1,0 +1,275 @@
+body {
+    min-height: 100vh;
+    background: #fff;
+    margin: 0;
+    font: 1em sans-serif;
+    display: grid;
+    grid-template-columns: 1fr;
+    justify-content: center;
+    place-items: center;
+}
+
+.descrição {
+    font-size: 1.2em;
+    color: #000;
+    margin: 20px 0;
+}
+
+img {
+    width: 100px;
+    height: 100px;
+    margin: 50px 40px 0 0;
+    border-radius: 500px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+    align-self: flex-start;
+}
+img:hover {
+    transform: scale(1.1);
+}
+header {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #ee3737;
+    margin-top: -60px;
+}
+.menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    position: absolute;
+    top: 20px;
+    right: 20px;
+}
+.menu ul {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    padding: 0px;
+    margin: 0px;
+}
+.menu li {
+    margin: 0 10px 0px 0px;
+    padding: 10px 20px;
+    background-color: #f04646;
+    border-radius: 5px;
+    border: 2px solid #f04646;
+}
+.menu li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+}
+.menu li:hover {
+    background-color: #fff;
+    border: 2px solid #f04646;
+}
+.menu li:hover a {
+    color: #f04646;
+    background-color: #fff;
+}
+footer {
+    width: 100%;
+    height: 60px;
+    background-color: #f04646;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-size: 0.9em;
+    position: fixed;
+    bottom: 0;
+}
+#conteudos {
+    width: 75px;
+    border: 2px solid #000;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 2px 2px 0 5px;
+    color: #8d3dc8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: 0.3s linear;
+}
+#conteudos:hover, #conteudos:focus {
+    outline: none;
+    color: #8d3dc8;
+}
+#conteudos:focus {
+    text-decoration: underline;
+}
+button {
+    background-color: #f04646;
+    color: #fff;
+    padding: 10px 20px;
+    border: 2px solid #f04646;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+/* The popup form - hidden by default */
+.form-popup {
+  display: none;
+  position: fixed;
+  bottom: 80px;
+  right: 150px;
+  border-radius: 10px;
+  z-index: 9;
+}
+
+/* Add styles to the form container */
+.form-container {
+  max-width: 300px;
+  padding: 10px;
+  background-color: white;
+  border: 2px solid aquamarine;
+  border-radius: 5px;
+}
+
+.form-popup_premium {
+  display: none;
+  position: fixed;  
+  bottom: 250px;
+  right: 380px;
+  z-index: 9;
+}
+
+#exp {
+  text-align: center;
+  font-size: 1.5em;
+  color: #fff;
+  background-color: #f04646;
+  margin-bottom: 20px;
+  border: solid 2px #000;
+  border-radius: 5px;
+  padding: 0 0 110px 0;
+}
+
+.form-container_premium {
+  text-align: center;  
+  color: gold;
+  max-width: 800px;
+  height: 300px;
+  padding: 20px;
+  background-color: rgb(228, 38, 38);
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+/* Full-width input fields */
+.form-container input[type=text], .form-container input[type=password] {
+  width: 75%;
+  padding: 15px;
+  margin: 5px 0 22px 0;
+  border: solid 5px #000;
+  border-radius: 20px;
+  border-color: #a0a0a0;
+  border-bottom-width: 2px;
+  background-color: #f1efef;
+  margin-bottom: 3rem;
+  transition: 0.15s linear;
+}
+
+/* When the inputs get focus, do something */
+.form-container input[type=text]:focus, .form-container input[type=password]:focus {
+  outline: none;
+  border-color: greenyellow;
+}
+
+/* Add a red background color to the cancel button */
+.form-container .cancel {
+  background-color: #ee3737;
+}
+
+.btn {
+    font-size: 1.1875em;
+    border: solid 2px #000;
+    border-radius: 20px;
+    width: 99px;
+    margin: 0 20px 10px 0;
+    padding: 10px 20px;
+    background-color: #ee3737;
+    color: #fff;
+    align-self: flex-end;
+    transition: transform 0.3s ease;
+}
+
+.btn:hover {
+    background-color: #f04646;
+    color: #fff;
+    border: solid 2px #f04646;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+.btn:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.btn_premium {
+    font-size: 1.1875em;
+    border: solid 2px gold;
+    border-radius: 20px;
+    width: 175px;
+    margin: -20px 90px 0px 0px;
+    padding: 10px 20px;
+    background-color: #ee3737;
+    color: gold;
+    align-self: flex-end;
+    transition: transform 0.3s ease;
+}
+.btn_premium:hover {
+    background-color: #f04646;
+    color: gold;
+    border: solid 2px gold;
+    transform: scale(1.05);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+}
+
+.btn_premium:focus {
+    outline: none;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.open-button_premium {
+    background-color: #f04646;
+    color: gold;
+    padding: 10px 20px;
+    border: 3px solid gold;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.form-container a {
+    width: 9%;
+    background-color: #fff;
+    padding: 2px 2px 0 5px;
+    color: #8d3dc8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: 0.3s linear;
+}
+.form-container a:hover, .form-container a:focus {
+    outline: none;
+    color: #8d3dc8;
+}
+.form-container a:focus {
+    text-decoration: underline;
+}

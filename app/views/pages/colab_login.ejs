@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <script src="../js/colab_login.js"></script>
+    <form action="/colab_login" method="post">
+        <p>Entrar na sua conta</p>
+        <label for="email">E-mail:</label>
+        <input type="email" id="email" name="email">
+        <br />
+        <label for="username">Usuário:</label>
+        <input type="text" id="username" name="username">
+        <br />
+        <label for="password">Senha:</label>
+        <input type="password" id="password" name="password" pattern=".{5,}" title="A senha deve ter pelo menos 5 caracteres"/>
+        <br />
+        <label for="access-code">Código de acesso:</label>
+        <input type="password" id="access-code" name="access-code" pattern=".{5,}" title="O código de acesso deve ter pelo menos 5 caracteres"/>
+        <br />
+        <input class="login" type="submit" value="Login" onclick="return register()" />
+        <p><a href="/forgot">Esqueci minha senha</a></p>
+        <p><a href="/">Voltar para a página inicial</a></p>
+    </form>
+</body>
+</html>

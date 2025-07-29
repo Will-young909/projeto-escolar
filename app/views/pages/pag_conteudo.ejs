@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conteúdo</title>
+    <link rel="stylesheet" href="../css/pag_conteudo.css">
+    <script src="../js/pag_conteudo.js"></script>
+</head>
+<body>
+    <header>
+        <h1>Postagem de Conteúdos</h1>
+        <br>
+        <h2>Últimos conteúdos liberados:</h2>
+        <ul>
+            <li>Potenciação</li>
+            <li>Função</li>
+            <li>Geometria</li>
+        </ul>
+    </header>
+    <br>
+    <br>
+    <br>
+    <main>
+        <form action="/conteudo" method="post" onsubmit="return validarFormulario()">
+            <label for="Assunto">Assunto:</label>
+            <input type="text" id="Assunto" name="Assunto" value="<%= valores.Assunto || '' %>">
+            <% if (erros && erros.Assunto) { %>
+                <span class="erro"><%= erros.Assunto %></span><br />
+            <% } %>
+            <br />
+            <label for="Titulo">Titulo:</label>
+            <input type="text" id="Titulo" name="Titulo" value="<%= valores.Titulo || '' %>">
+            <% if (erros && erros.Titulo) { %>
+                <span class="erro"><%= erros.Titulo %></span><br />
+            <% } %>
+            <br />
+            <label for="Explicacao">Explicação:</label>
+            <input type="text" id="Explicacao" name="Explicacao" value="<%= valores.Explicacao || '' %>">
+            <% if (erros && erros.Explicacao) { %>
+                <span class="erro"><%= erros.Explicacao %></span><br />
+            <% } %>
+            <br />
+            <label for="Exercicios">Exercícios:</label>
+            <input type="text" id="Exercicios" name="Exercicios" value="<%= valores.Exercicios || '' %>">
+            <% if (erros && erros.Exercicios) { %>
+                <span class="erro"><%= erros.Exercicios %></span><br />
+            <% } %>
+            <br />
+            <div role="button" class="uArJ5e" id="btnAdicionar" aria-label="Adicionar pergunta" tabindex="0" title="Adicionar pergunta">
+             <span class="GmuOkf">
+              <div class="foqfDc">
+               <!-- Ícone pode ser SVG ou uma imagem -->
+               <svg width="24" height="24" viewBox="0 0 24 24" fill="#5f6368">
+                <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+               </svg>
+              </div>
+             </span>
+            </div>
+            <p id="mensagemResultado"></p>
+            <button class="login" type="submit">Postar</button>
+            <% if (typeof session !== 'undefined' && session.logado) { %>
+                <p><a href="/logado">Voltar para a página inicial</a></p>
+            <% } else { %>
+                <p><a href="/">Voltar para a página inicial</a></p>
+            <% } %>
+        </form>
+    </main>
+</body>
+</html>
