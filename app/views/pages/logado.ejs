@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regimath</title>
+    <link rel="stylesheet" href="../css/pag_inicial.css">
+    <script src="../js/pag_inicial.js"></script>
+</head>
+<body>
+    <header>
+        <img src="../imagens/logo.png" alt="Logo do Regimath">
+        <nav class="menu">
+            <button class="open-button_premium" onclick="openForm()">Premium</button>
+            <ul>
+                <li><a href="/perfil">Perfil</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Aumente sua nota conosco!</h1>
+        <p class="descrição">Você está acessando o RegiMath, um site focado assuntos de matemática que são ensinados no ensino médio.</p>
+        <p class="descrição">Aqui você encontrará um explicação sobre o assunto desejado, e até poderá fazer simulados que usam questões das suas provas!</p>
+        <h2>Conteúdos</h2>
+        <p id="conteudos"><a href="/acess"> Conteúdos</a></p>
+        <div class="form-popup_premium" id="myForm">
+          <form action="" class="form-container_premium" onsubmit="return register()">
+           <h1>Seja um membro premium</h1>
+           <p id="exp">Ao se tornar um membro premium, você terá acesso a conteúdos exclusivos e recursos adicionais.</p>
+           <button type="submit" class="btn_premium">R$ 29,90</button>
+           <button type="button" class="btn cancel" onclick="closeForm()">Fechar</button>
+          </form>
+        </div>
+    </main>
+    <footer>
+
+    </footer>
+</body>
+</html>
