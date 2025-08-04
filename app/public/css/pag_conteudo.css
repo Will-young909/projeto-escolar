@@ -9,7 +9,10 @@ body {
 }
 header {
     width: 100%;
+    padding: 0 100px;
     display: grid;
+    text-align: center;
+    text-decoration:underline;
     justify-content: center;
     background-color: #fff;
     font-size: larger;
@@ -25,7 +28,7 @@ form {
     width: 100%;
     max-width: 28rem;
     background: #fff;
-    padding: 4rem;
+    padding: 3rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 1.8rem 1rem rgba(0, 0, 0, 0.15);
 }
@@ -44,7 +47,7 @@ input {
 }
 input:focus {
     outline: none;
-    border-color: #f04646;
+    border-color: greenyellow;
 }
 label {
     width: 100%;

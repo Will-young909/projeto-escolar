@@ -9,7 +9,7 @@ body {
     place-items: center;
 }
 p {
-    font-size: 0.875rem;
+    font-size: 1.3125em;
     font-weight: 700;
     color: #333;
     margin-bottom: 5rem;
@@ -33,25 +33,44 @@ label {
     transition: 0.15s linear;
 }
 label:focus-within {
-    color: #f04646;
+    color: #8d3dc8;
 }
 input {
     font-size: 1.1875em;
     color: #404040;
     padding: 1rem 0 0.5rem 0;
-    border: solid 5px #000;
-    border-radius: 20px;
+    border: none;
     width: 100%;
-    align-self: flex-start;
     border-color: #a0a0a0;
-    border-bottom-width: 2px;
-    background-color: #f1efef;
-    margin-bottom: 1rem;
+    border-bottom-width: 1px;
+    border-bottom-style: dotted;
+    margin-bottom: 3rem;
     transition: 0.15s linear;
 }
 input:focus {
     outline: none;
-    border-color: greenyellow;
+    border-color: #8d3dc8;
+}
+button {
+    font-size: 0.8125rem;
+    line-height: 2rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    width: 100%;
+    padding: 1rem 2rem;
+    cursor: pointer;
+    background: transparent;
+    color: #81259d;
+    border: 1px solid currentColor;
+    border-radius: 4px;
+    margin-top: 0.5rem;
+    box-shadow: 0 0 1.8rem 1rem rgba(0, 0, 0, 0.15);
+    transition: 0.25s linear;
+}
+button:hover, button:focus {
+    outline: none;
+    background: #8d3dc8;
+    color: #fff;
 }
 a {
     color: #8d3dc8;
@@ -67,27 +86,14 @@ a:hover, a:focus {
 a:focus {
     text-decoration: underline;
 }
-.login {
-    font-size: 1.1875em;
-    border: solid 2px #000;
-    border-radius: 20px;
-    width: 22%;
-    margin: 0 10px;
-    padding: 10px 10px;
-    background-color: #ee3737;
-    color: #fff;
-    align-self: flex-end;
-    transition: transform 0.3s ease;
+a:first-of-type {
+    margin-top: 3rem;
 }
-.login:hover {
-    background-color: #f04646;
-    color: #fff;
-    border: solid 2px #f04646;
-    transform: scale(1.05);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
+a + a {
+    margin-top: 1.125rem;
 }
-.login:focus {
-    outline: none;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Ajusta automaticamente */
+    gap: 1rem;
+  }

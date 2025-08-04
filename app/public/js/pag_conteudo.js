@@ -18,7 +18,6 @@ window.addEventListener('DOMContentLoaded', function() {
         input.name = 'exercicios[]';
         input.id = idUnico;
         input.className = 'input-exercicio';
-        input.placeholder = 'Digite o exercício';
 
         // Insere antes do botão de adicionar
         form.insertBefore(label, botao);
