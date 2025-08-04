@@ -58,8 +58,8 @@ router.post('/login', (req, res) => {
 
 router.post('/colab_login', (req, res) => {
     // Aqui você faria a validação do login do colaborador
-    req.session.logado = true;
-    res.redirect('/logado');
+    req.session.colaborador = true;
+    res.redirect('/colab_pag');
 });
 
 router.post('/login', (req, res) => {
@@ -115,7 +115,24 @@ router.get('/logado', (req, res) => {
 });
 
 router.get('/acess', (req, res) => {
-    res.render('pages/acess_cont');
+    res.render('pages/acess_conte');
+});
+
+router.get('/colab_pag', checkColab, (req, res) => {
+    res.render('pages/colab_pag', { session: req.session.colaborador });
+});
+
+router.get('/perfil', (req, res) => {
+    //if (!req.session.logado) {
+    //    return res.redirect('/');
+    //}
+    res.render('pages/perfil', { session: req.session });
+});
+
+// Rota para criar conteúdo colaborativo
+router.post('/colab_pag', checkColab, (req, res) => {
+    // Aqui você faria a lógica para criar o conteúdo colaborativo
+    res.redirect('/colab_pag');
 });
 
 // Logout
