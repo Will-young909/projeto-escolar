@@ -21,7 +21,7 @@ form {
     align-items: center;
     width: 100%;
     max-width: 28rem;
-    background: #fff;
+    background: #f2f3f4;
     padding: 4rem;
     border-radius: 0.5rem;
     box-shadow: 0 0 1.8rem 1rem rgba(0, 0, 0, 0.15);
@@ -45,13 +45,13 @@ input {
     align-self: flex-start;
     border-color: #a0a0a0;
     border-bottom-width: 2px;
-    background-color: #f1efef;
+    background-color: #f2f3f4;
     margin-bottom: 1rem;
     transition: 0.15s linear;
 }
 input:focus {
     outline: none;
-    border-color: greenyellow;
+    border-color: #98FB98;
 }
 a {
     color: #8d3dc8;
@@ -80,13 +80,13 @@ a + a {
     margin: 0px 10px;
     padding: 10px 20px;
     background-color: #ee3737;
-    color: #fff;
+    color: #f2f3f4;
     align-self: flex-end;
     transition: transform 0.3s ease;
 }
 .login:hover {
     background-color: #f04646;
-    color: #fff;
+    color: #f2f3f4;
     border: solid 2px #f04646;
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);

@@ -9,6 +9,9 @@ function ensureLoggedIn(req, res, next) {
         return res.redirect('/logado');
     }
     next();
+    if(req.session.colaborador){
+        return res.redirect('/colab_pag');
+    }
 }
 
 // Página inicial pública, redireciona se já estiver logado
