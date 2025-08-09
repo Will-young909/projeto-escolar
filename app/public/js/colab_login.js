@@ -9,7 +9,7 @@ function register() {
     const email = document.getElementById("email");
     const usuario = document.getElementById("username");
     const senha = document.getElementById("password");
-    const confirmar_senha = document.getElementById("access-code");
+    const codigo_de_acesso = document.getElementById("access-code");
     if (!email.value) {
         showError(email, "Preencha o e-mail.");
         setErrorBorder(email);
@@ -33,13 +33,9 @@ function register() {
         setErrorBorder(senha);
         valid = false;
     }
-    if (!confirmar_senha.value) {
-        showError(confirmar_senha, "Confirme a senha.");
-        setErrorBorder(confirmar_senha);
-        valid = false;
-    } else if (confirmar_senha.value !== senha.value) {
-        showError(confirmar_senha, "As senhas não coincidem.");
-        setErrorBorder(confirmar_senha);
+    if (!codigo_de_acesso.value) {
+        showError(codigo_de_acesso, "insira o código.");
+        setErrorBorder(codigo_de_acesso);
         valid = false;
     }
     return valid;
