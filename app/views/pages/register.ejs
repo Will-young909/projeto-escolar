@@ -10,7 +10,15 @@
 <body>
     <form action="/register" method="post">
         <h2>Crie uma conta</h2>
-        
+
+        <label for="tipo">Você é:</label>
+        <select id="tipo" name="tipo">
+         <option value="">Selecione</option>
+         <option value="aluno">Aluno</option>
+         <option value="professor">Professor</option>
+        </select>
+
+
         <label for="email">E-mail:</label><br>
         <input type="email" id="email" name="email"><br>
         

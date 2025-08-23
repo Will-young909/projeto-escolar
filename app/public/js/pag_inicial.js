@@ -7,31 +7,37 @@ function closeForm() {
 }
 
 function register() {
-let valid = true;
+    let valid = true;
 
-// Limpa mensagens e bordas anteriores
-document.querySelectorAll('.erro-span').forEach(span => span.remove());
-document.querySelectorAll('input').forEach(input => input.style.borderColor = '');
+    // Limpa mensagens e bordas anteriores
+    document.querySelectorAll('.erro-span').forEach(span => span.remove());
+    document.querySelectorAll('input, select').forEach(input => input.style.borderColor = '');
 
-// Validação dos campos
-const email = document.getElementById("email");
-const psw = document.getElementById("psw");
+    // Validação dos campos
+    const email = document.getElementById("email");
+    const psw = document.getElementById("psw");
+    const tipo = document.getElementById("tipo");
 
-if (!email.value) {
-showError(email, "Preencha o e-mail.");
-setErrorBorder(email);
-valid = false;
-} else if (!isEmail(email.value)) {
-showError(email, "Digite um e-mail válido.");
-setErrorBorder(email);
-valid = false;
-}
-if (!psw.value) {
-showError(psw, "Preencha a senha.");
-setErrorBorder(psw);
-valid = false; 
-} 
-return valid;
+    if (!email.value) {
+        showError(email, "Preencha o e-mail.");
+        setErrorBorder(email);
+        valid = false;
+    } else if (!isEmail(email.value)) {
+        showError(email, "Digite um e-mail válido.");
+        setErrorBorder(email);
+        valid = false;
+    }
+    if (!psw.value) {
+        showError(psw, "Preencha a senha.");
+        setErrorBorder(psw);
+        valid = false; 
+    }
+    if (!tipo.value) {
+        showError(tipo, "Selecione se você é Aluno ou Professor.");
+        setErrorBorder(tipo);
+        valid = false;
+    }
+    return valid;
 }
 
 function showError(input, message) {

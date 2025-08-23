@@ -1,39 +1,205 @@
-window.addEventListener('DOMContentLoaded', function() {
-    // Captura do botão
-    const botao = document.getElementById("btnAdicionar");
+let exercicioId = 0;
 
-    // Adiciona a ação de clique
-    botao.addEventListener("click", function(e) {
-        e.preventDefault(); // Evita comportamento padrão
+function adicionarExercicio() {
+  const container = document.getElementById('Exercicios');
+  const div = document.createElement('div');
+  div.className = 'exercicio';
+  div.innerHTML = `
+    <input type="text" placeholder="Pergunta" class="pergunta">
+    <input type="text" placeholder="URL da imagem (opcional)" class="imagem">
+    <select class="tipo" onchange="atualizarTipo(this)">
+      <option value="">...</option>
+      <option value="alternativa">Alternativa</option>
+      <option value="escrita">Resposta escrita</option>
+    </select>
+    <div class="alternativas" style="display:none">
+      <p>Alternativas:</p>
+      <div class="lista-alternativas"></div>
+      <button type="button" onclick="adicionarAlternativa(this)">+ Alternativa</button>
+    </div>
+    <div class="correcao-container" style="display:none">
+      <input type="text" placeholder="Resposta correta" class="correcao">
+    </div>
+  `;
+  container.appendChild(div);
+}
 
-        // Cria novo input de Exercícios
-        const form = botao.closest('form');
-        const br = document.createElement('br');
-        const idUnico = 'exercicio_' + Date.now();
-        const label = document.createElement('label');
-        label.textContent = 'Exercícios:';
-        label.setAttribute('for', idUnico);
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.name = 'exercicios[]';
-        input.id = idUnico;
-        input.className = 'input-exercicio';
 
-        // Insere antes do botão de adicionar
-        form.insertBefore(label, botao);
-        form.insertBefore(input, botao);
-        form.insertBefore(br, botao);
+function atualizarTipo(select) {
+  const alternativasDiv = select.parentElement.querySelector('.alternativas');
+  const correcaoDiv = select.parentElement.querySelector('.correcao-container');
+  if (select.value === 'alternativa') {
+    alternativasDiv.style.display = 'block';
+    correcaoDiv.style.display = 'none';
+    alternativasDiv.querySelector('.lista-alternativas').innerHTML = '';
+  } else if (select.value === 'escrita') {
+    alternativasDiv.style.display = 'none';
+    correcaoDiv.style.display = 'block';
+  } else {
+    alternativasDiv.style.display = 'none';
+    correcaoDiv.style.display = 'none';
+  }
+}
 
-        document.getElementById("mensagemResultado").innerText = "Pergunta adicionada!";
-        
-        // Também pode chamar funções ou atualizar o DOM
-        console.log("Botão clicado!");
-    });
+
+    function adicionarAlternativa(btn) {
+      const container = btn.parentElement.querySelector('.lista-alternativas');
+      const div = document.createElement('div');
+      div.innerHTML = `
+        <input type="text" class="alternativa" placeholder="Texto da alternativa">
+        <label>
+          <input type="radio" name="correta-${exercicioId}" class="correta"> Correta
+        </label>
+      `;
+      container.appendChild(div);
+    }
+
+
+
+document.getElementById('form-conteudo').addEventListener('submit', function(e) {
+  e.preventDefault();
+  // Limpa mensagens e bordas anteriores
+  document.querySelectorAll('.erro-span').forEach(span => span.remove());
+  document.querySelectorAll('input, select').forEach(input => input.style.borderColor = '');
+
+  let valid = true;
+
+  // Validação dos campos principais
+  const titulo = document.getElementById('Titulo');
+  const assunto = document.getElementById('Assunto');
+  const explicacao = document.getElementById('Explicacao');
+  if (!titulo.value.trim()) {
+    showError(titulo, 'Preencha o título.');
+    setErrorBorder(titulo);
+    valid = false;
+  }
+  if (!assunto.value.trim()) {
+    showError(assunto, 'Preencha o assunto.');
+    setErrorBorder(assunto);
+    valid = false;
+  }
+  if (!explicacao.value.trim()) {
+    showError(explicacao, 'Preencha a explicação.');
+    setErrorBorder(explicacao);
+    valid = false;
+  }
+
+  // Validação dos exercícios
+  const exerciciosDivs = Array.from(document.querySelectorAll('.exercicio'));
+  if (exerciciosDivs.length === 0) {
+    const exerciciosContainer = document.getElementById('Exercicios');
+    showError(exerciciosContainer, 'Adicione pelo menos um exercício.');
+    setErrorBorder(exerciciosContainer);
+    valid = false;
+  }
+
+  const exercicios = exerciciosDivs.map((ex, idx) => {
+    const pergunta = ex.querySelector('.pergunta');
+    const imagem = ex.querySelector('.imagem');
+    const tipo = ex.querySelector('.tipo');
+    let alternativas = [];
+    let correcao = '';
+
+    if (!pergunta.value.trim()) {
+      showError(pergunta, `Preencha a pergunta do exercício ${idx + 1}.`);
+      setErrorBorder(pergunta);
+      valid = false;
+    }
+
+    if (tipo.value === '') {
+      showError(tipo, `Selecione o tipo do exercício ${idx + 1}.`);
+      setErrorBorder(tipo);
+      valid = false;
+    }
+
+    if (tipo.value === 'alternativa') {
+      alternativas = Array.from(ex.querySelectorAll('.alternativa')).map(a => a.value);
+      const corretaRadios = Array.from(ex.querySelectorAll('.correta'));
+      const corretaIndex = corretaRadios.findIndex(c => c.checked);
+      if (alternativas.length === 0 || alternativas.some(a => !a.trim())) {
+        showError(ex.querySelector('.lista-alternativas'), `Preencha todas as alternativas do exercício ${idx + 1}.`);
+        valid = false;
+      }
+      if (corretaIndex === -1 || !alternativas[corretaIndex]) {
+        showError(ex.querySelector('.lista-alternativas'), `Selecione uma alternativa correta no exercício ${idx + 1}.`);
+        valid = false;
+      } else {
+        correcao = alternativas[corretaIndex];
+      }
+    } else if (tipo.value === 'escrita') {
+      const correcaoInput = ex.querySelector('.correcao');
+      if (!correcaoInput || !correcaoInput.value.trim()) {
+        showError(correcaoInput, `Preencha a resposta correta do exercício ${idx + 1}.`);
+        setErrorBorder(correcaoInput);
+        valid = false;
+      } else {
+        correcao = correcaoInput.value.trim();
+      }
+    }
+
+    return {
+      pergunta: pergunta.value,
+      imagem: imagem.value,
+      tipo: tipo.value,
+      alternativas,
+      correcao
+    };
+  });
+
+  if (!valid) return;
+
+  const conteudo = {
+    id: Date.now(),
+    titulo: titulo.value,
+    assunto: assunto.value,
+    explicacao: explicacao.value,
+    exercicios
+  };
+
+  const lista = JSON.parse(localStorage.getItem('conteudos')) || [];
+  lista.push(conteudo);
+  localStorage.setItem('conteudos', JSON.stringify(lista));
+
+  // Envia para o backend
+  fetch('/api/conteudo', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(conteudo)
+  })
+  .then(response => {
+    window.location.href = '/acess';
+  })
+  .catch(() => {
+    // Mesmo se der erro, redireciona para não travar o usuário
+    window.location.href = '/acess';
+  });
 });
+
+function showError(input, message) {
+  const span = document.createElement('span');
+  span.className = 'erro-span';
+  span.style.color = '#fff';
+  span.style.fontSize = '1.1em';
+  span.style.display = 'block';
+  //span.style.marginTop = '0.5em';
+  span.style.marginBottom = '2.2em'; // Espaço maior abaixo da mensagem de erro
+  span.style.fontWeight = 'bold';
+  span.style.border = '5px solid #ee3737';
+  span.style.borderRadius = '20px';
+  //span.style.padding = '2.5px';
+  span.style.backgroundColor = '#ee3737';
+  span.textContent = message;
+  if (input) input.parentNode.insertBefore(span, input.nextSibling);
+}
+
+function setErrorBorder(input) {
+  if (input) input.style.borderColor = 'red';
+}
 // Função para validar o formulário
 function validarFormulario() {
     // Limpa mensagens e bordas anteriores
-    // Remove spans de erro do frontend e backend
     document.querySelectorAll('.erro-span, .erro').forEach(span => {
         if (span && span.parentNode) span.parentNode.removeChild(span);
     });
@@ -45,7 +211,6 @@ function validarFormulario() {
     const assunto = document.getElementById("Assunto");
     const titulo = document.getElementById("Titulo");
     const explicacao = document.getElementById("Explicacao");
-    // Valida campo principal de exercícios
     const exercicios = document.getElementById("Exercicios");
     if (!assunto.value.trim()) {
         showError(assunto, "Preencha o assunto.");
@@ -76,7 +241,35 @@ function validarFormulario() {
             valid = false;
         }
     });
-    return valid;
+    if (!valid) return false;
+
+    // Coleta todos os exercícios em um array
+    let listaExercicios = [exercicios.value];
+    exerciciosDinamicos.forEach(function(input) {
+        listaExercicios.push(input.value);
+    });
+
+    // Cria objeto da postagem
+    const novaPostagem = {
+        assunto: assunto.value,
+        titulo: titulo.value,
+        explicacao: explicacao.value,
+        exercicios: listaExercicios,
+        data: new Date().toLocaleString()
+    };
+
+    // Recupera postagens existentes
+    let postagens = JSON.parse(localStorage.getItem('postagens')) || [];
+    postagens.push(novaPostagem);
+
+    // Salva de volta
+    localStorage.setItem('postagens', JSON.stringify(postagens));
+
+    // Redireciona para /acess
+    window.location.href = '/acess';
+
+    // Impede envio do formulário para o backend
+    return false;
 }
 function showError(input, message) {
     const span = document.createElement('span');

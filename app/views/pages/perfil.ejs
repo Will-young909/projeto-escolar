@@ -18,14 +18,17 @@
 
         <% if (session.premium) { %>
             <p>Acesso a conteúdos exclusivos.</p>
-        <% } else { %>
-            <p>Para acessar conteúdos premium, torne-se um membro premium.</p>
-            <a href="#">Tornar-se Premium</a>
+        <br>
+        <br>
+        <br>
         <% } %>
         <br>
         <br>
-        <br>
-        <a href="">Voltar</a>
+        <% if (session.colaborador) { %>
+            <a href="/colab_pag">Voltar</a>
+        <% } else { %>
+            <a href="/logado">Voltar</a>
+        <% } %>
         <br>
         <br>
         <br>

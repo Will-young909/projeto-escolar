@@ -3,15 +3,32 @@ const router = express.Router();
 const session = require('express-session');
 const { body, validationResult } = require("express-validator");
 
+
+// Rota para receber e salvar conteúdos via POST
+router.post('/api/conteudo', (req, res) => {
+    const conteudosPath = path.join(__dirname, '../../conteudos.json');
+    let lista = [];
+    if (fs.existsSync(conteudosPath)) {
+        try {
+            lista = JSON.parse(fs.readFileSync(conteudosPath, 'utf8'));
+        } catch (e) {
+            lista = [];
+        }
+    }
+    const novoConteudo = req.body;
+    lista.push(novoConteudo);
+    fs.writeFileSync(conteudosPath, JSON.stringify(lista, null, 2), 'utf8');
+    res.status(201).json({ sucesso: true });
+});
+
 // Middleware para proteger rotas e redirecionar usuários logados
 function ensureLoggedIn(req, res, next) {
     if (req.session && req.session.logado) {
         return res.redirect('/logado');
-    }
-    next();
-    if(req.session.colaborador){
+    }else if (req.session.colaborador) {
         return res.redirect('/colab_pag');
     }
+    next();
 }
 
 // Página inicial pública, redireciona se já estiver logado
@@ -46,16 +63,32 @@ router.get('/conteudo', (req, res) => {
 });
 
 router.post('/register', (req, res) => {
-    req.session.logado = true;
-    res.redirect('/logado');
+    const tipo = req.body.tipo;
+    if (tipo === 'professor') {
+        req.session.professor = true;
+        res.redirect('/logado');
+    } else {
+        req.session.logado = true;
+        res.redirect('/logado');
+    }
 });
 
 // Exemplo de login (ajuste conforme seu sistema de autenticação)
+
 router.post('/login', (req, res) => {
     // Aqui você faria a validação do login
-    // Se login OK:
-    req.session.logado = true;
-    res.redirect('/logado');
+    const tipo = req.body.tipo;
+    if (tipo === 'professor') {
+        req.session.professor = true;
+        // Remove session.logado caso exista
+        if (req.session.logado) delete req.session.logado;
+        res.redirect('/logado');
+    } else {
+        req.session.logado = true;
+        // Remove session.professor caso exista
+        if (req.session.professor) delete req.session.professor;
+        res.redirect('/logado');
+    }
     // Se login inválido, renderize a página de login com erro
 });
 
@@ -65,11 +98,6 @@ router.post('/colab_login', (req, res) => {
     res.redirect('/colab_pag');
 });
 
-router.post('/login', (req, res) => {
-    // Aqui você faria a validação do login
-    req.session.logado = true;
-    res.redirect('/logado');
-});
 
 router.post('/forgot', (req, res) => {
     // Aqui você faria a validação do login
@@ -98,14 +126,25 @@ router.post('/conteudo', (req, res) => {
     res.render('pages/pag_conteudo', { sucesso: true, erros: {}, valores: {}, session: req.session });
 });
 
-// Middleware para verificar se o usuário está logado
-function checkLogin(req, res, next) {
+
+// Middleware para verificar se o usuário é aluno
+function checkAluno(req, res, next) {
     if (!req.session.logado) {
         return res.redirect('/');
     }
     next();
 }
-// Middleware para verificar se o usuário é um colaborador
+
+
+// Middleware para verificar se o usuário é professor ou aluno
+function checkPerfil(req, res, next) {
+    if (!req.session.professor && !req.session.logado) {
+        return res.redirect('/');
+    }
+    next();
+}
+
+// Middleware para verificar se o usuário é colaborador
 function checkColab(req, res, next) {
     if (!req.session.colaborador) {
         return res.redirect('/');
@@ -113,8 +152,13 @@ function checkColab(req, res, next) {
     next();
 }
 
+
 router.get('/logado', (req, res) => {
-    res.render('pages/logado');
+    // Permite acesso tanto para aluno quanto para professor
+    if (!req.session.logado && !req.session.professor) {
+        return res.redirect('/');
+    }
+    res.render('pages/logado', { session: req.session });
 });
 
 router.get('/acess', (req, res) => {
@@ -125,10 +169,8 @@ router.get('/colab_pag', checkColab, (req, res) => {
     res.render('pages/colab_pag', { session: req.session.colaborador });
 });
 
-router.get('/perfil', (req, res) => {
-    //if (!req.session.logado) {
-    //    return res.redirect('/');
-    //}
+
+router.get('/perfil', checkPerfil, (req, res) => {
     res.render('pages/perfil', { session: req.session });
 });
 
@@ -136,6 +178,28 @@ router.get('/perfil', (req, res) => {
 router.post('/colab_pag', checkColab, (req, res) => {
     // Aqui você faria a lógica para criar o conteúdo colaborativo
     res.redirect('/colab_pag');
+});
+
+const fs = require('fs');
+const path = require('path');
+
+router.get('/ver', (req, res) => {
+    const id = parseInt(req.query.id);
+    // Simula leitura do localStorage: lê arquivo conteudos.json na raiz do projeto
+    const conteudosPath = path.join(__dirname, '../../conteudos.json');
+    let lista = [];
+    if (fs.existsSync(conteudosPath)) {
+        try {
+            lista = JSON.parse(fs.readFileSync(conteudosPath, 'utf8'));
+        } catch (e) {
+            lista = [];
+        }
+    }
+    const item = lista.find(c => c.id === id);
+    if (!item) {
+        return res.render('pages/ver_conteudo', { conteudo: null });
+    }
+    res.render('pages/ver_conteudo', { conteudo: item });
 });
 
 // Logout
