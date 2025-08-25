@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Ver Conteúdo</title>
+  <link rel="stylesheet" href="../css/ver_conteudo.css">
+</head>
+<body>
+  <div class="container">
+    <% if (!conteudo) { %>
+      <p>Conteúdo não encontrado.</p>
+    <% } else { %>
+      <h2><%= conteudo.titulo %></h2>
+      <h4>Assunto: <%= conteudo.assunto %></h4>
+      <p><%= conteudo.explicacao %></p>
+      <h3>Exercícios</h3>
+  <% conteudo.exercicios.forEach(function(ex, i) { %>
+        <div class="exercicio">
+          <p><strong><%= ex.pergunta %></strong></p>
+          <% if (ex.imagem) { %>
+            <img src="<%= ex.imagem %>" alt="Imagem do exercício">
+          <% } %>
+          <% if (ex.tipo === 'alternativa') { %>
+            <% ex.alternativas.forEach(function(alt, idx) { %>
+              <label>
+                <input type="radio" name="ex-<%= i %>" value="<%= alt %>"> <%= alt %>
+              </label><br>
+            <% }); %>
+            <button onclick='verificarResposta(<%= i %>, "alternativa", this.dataset.correcao)' data-correcao="<%= ex.correcao %>">Verificar</button>
+            <div id="feedback-<%= i %>" class="feedback"></div>
+          <% } else if (ex.tipo === 'escrita') { %>
+            <input id="resposta-<%= i %>" placeholder="Digite sua resposta">
+            <button onclick='verificarResposta(<%= i %>, "escrita", this.dataset.correcao)' data-correcao="<%= ex.correcao %>">Verificar</button>
+            <div id="feedback-<%= i %>" class="feedback"></div>
+          <% } %>
+        </div>
+      <% }); %>
+    <% } %>
+    <script>
+      function verificarResposta(i, tipo, correcao) {
+        let resposta = '';
+        let feedback = document.getElementById('feedback-' + i);
+        if (tipo === 'alternativa') {
+          const selecionado = document.querySelector('input[name="ex-' + i + '"]:checked');
+          resposta = selecionado ? selecionado.value : '';
+          if (resposta === correcao) {
+            feedback.innerHTML = '<span class="correta">✅ Correto! Resposta: ' + correcao + '</span>';
+          } else {
+            feedback.innerHTML = '<span class="errada">❌ Errado. Resposta correta: ' + correcao + '</span>';
+          }
+        } else if (tipo === 'escrita') {
+          resposta = document.getElementById('resposta-' + i).value.trim();
+          if (resposta.toLowerCase() === correcao.toLowerCase()) {
+            feedback.innerHTML = '<span class="correta">✅ Correto!</span>';
+          } else {
+            feedback.innerHTML = '<span class="errada">❌ Errado. Resposta correta: ' + correcao + '</span>';
+          }
+        }
+      }
+    </script>
+  </div>
+</body>
+</html>

@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Conteúdo</title>
     <link rel="stylesheet" href="../css/pag_conteudo.css">
-    <script src="../js/pag_conteudo.js"></script>
 </head>
 <body>
     <header>
@@ -22,50 +21,30 @@
     <br>
     <br>
     <main>
-        <form action="/conteudo" method="post" onsubmit="return validarFormulario()">
-            <label for="Assunto">Assunto:</label>
-            <input type="text" id="Assunto" name="Assunto" value="<%= valores.Assunto || '' %>">
-            <% if (erros && erros.Assunto) { %>
-                <span class="erro"><%= erros.Assunto %></span><br />
-            <% } %>
-            <br />
-            <label for="Titulo">Titulo:</label>
-            <input type="text" id="Titulo" name="Titulo" value="<%= valores.Titulo || '' %>">
-            <% if (erros && erros.Titulo) { %>
-                <span class="erro"><%= erros.Titulo %></span><br />
-            <% } %>
-            <br />
-            <label for="Explicacao">Explicação:</label>
-            <input type="text" id="Explicacao" name="Explicacao" value="<%= valores.Explicacao || '' %>">
-            <% if (erros && erros.Explicacao) { %>
-                <span class="erro"><%= erros.Explicacao %></span><br />
-            <% } %>
-            <br />
-            <label for="Exercicios">Exercícios:</label>
-            <input type="text" id="Exercicios" name="Exercicios" value="<%= valores.Exercicios || '' %>">
-            <% if (erros && erros.Exercicios) { %>
-                <span class="erro"><%= erros.Exercicios %></span><br />
-            <% } %>
-            <br />
-            <div role="button" class="uArJ5e" id="btnAdicionar" aria-label="Adicionar pergunta" tabindex="0" title="Adicionar pergunta">
-             <span class="GmuOkf">
-              <div class="foqfDc">
-               <!-- Ícone pode ser SVG ou uma imagem -->
-               <svg width="24" height="24" viewBox="0 0 24 24" fill="#5f6368">
-                <path d="M12 5v14m-7-7h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-               </svg>
-              </div>
-             </span>
-            </div>
-            <p id="mensagemResultado"></p>
+        <div class="container">
+          <form method="post" action="/conteudo" id="form-conteudo">
+          <input type="text" id="Titulo" placeholder="  Título">
+          <input type="text" id="Assunto" placeholder="  Assunto">
+          <input type="text" id="Explicacao" placeholder="  Explicação">
+          <h3>Exercícios</h3>
+          <div id="Exercicios"></div>
+           <button type="button" onclick="adicionarExercicio()">+ Adicionar Exercício</button>
+           <br>
+           <br>
             <button class="login" type="submit">Postar</button>
+            <br>
+            <br>
             <% if (typeof session !== 'undefined' && session.logado) { %>
                 <p><a href="/logado">Voltar para a página inicial</a></p>
             <% } else { %>
                 <p><a href="/colab_pag">Voltar para a página inicial</a></p>
             <% } %>
+            <br>
+            <br>
             <p><a href="/acess">Ver publicações</a></p>
-        </form>
+           </form>
+        </div>
     </main>
+    <script src="../js/pag_conteudo.js"></script>
 </body>
 </html>

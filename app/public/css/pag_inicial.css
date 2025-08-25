@@ -123,7 +123,7 @@ button {
 .form-popup {
   display: none;
   position: fixed;
-  bottom: 90px;
+  bottom: 100px;
   right: -30px;
   border-radius: 10px;
   z-index: 9;
@@ -272,4 +272,27 @@ button {
 }
 .form-container a:focus {
     text-decoration: underline;
+}
+label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: #333;
+    display: block;
+    transition: color 0.3s ease;
+}
+input {
+    margin-top: 4rem;
+}
+select {
+    background-color: #f2f3f4;
+    color: #404040;
+    padding: 0.5rem 0.5rem;
+    border: 2px solid #a0a0a0;
+    border-radius: 14px;
+    font: 0.875em sans-serif;
+}
+select:hover, select:focus {
+    cursor: pointer;
+    border-color: #98FB98;
+    outline: none;
 }

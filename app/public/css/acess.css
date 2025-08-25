@@ -27,3 +27,42 @@ footer {
     position: fixed;
     bottom: 0;
 }
+
+.container {
+    max-width: 900px;
+    margin: auto;
+}
+.card {
+    background: white;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+.card h2 {
+    margin: 0;
+    color: #333;
+}
+.card p {
+    color: #555;
+}
+.btn {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #ee3737;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 10px;
+    transition: transform 0.3s ease;
+}
+.btn:hover {
+    background-color: #f04646;
+    transform: scale(1.05);
+}
+.top-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+}

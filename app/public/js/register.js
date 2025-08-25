@@ -3,14 +3,20 @@ function register() {
 
     // Limpa mensagens e bordas anteriores
     document.querySelectorAll('.erro-span').forEach(span => span.remove());
-    document.querySelectorAll('input').forEach(input => input.style.borderColor = '');
+    document.querySelectorAll('input, select').forEach(input => input.style.borderColor = '');
 
     // Validação dos campos
+    const tipo = document.getElementById("tipo");
     const email = document.getElementById("email");
     const usuario = document.getElementById("usuario");
     const senha = document.getElementById("senha");
     const confirmar_senha = document.getElementById("confirmar_senha");
 
+    if (!tipo.value) {
+        showError(tipo, "Selecione se você é Aluno ou Professor.");
+        setErrorBorder(tipo);
+        valid = false;
+    }
     if (!email.value) {
         showError(email, "Preencha o e-mail.");
         setErrorBorder(email);

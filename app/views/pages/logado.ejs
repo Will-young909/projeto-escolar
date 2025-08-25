@@ -11,13 +11,23 @@
     <header>
         <img src="../imagens/Regimath_branco2.png" alt="Logo do Regimath">
         <nav class="menu">
+            <% if (typeof session !== 'undefined' && session.logado) { %>
             <button class="open-button_premium" onclick="openForm()">Premium</button>
+            <% } %>
             <ul>
                 <li><a href="/perfil">Perfil</a></li>
             </ul>
         </nav>
     </header>
     <main>
+        <% if (typeof session !== 'undefined' && session.professor) { %>
+        <h1>Bem-vindo, Professor!</h1>
+        <p class="descrição">Você está acessando o RegiMath, um site focado assuntos de matemática que são ensinados no ensino médio.</p>
+        <p class="descrição">Aqui você poderá postar conteúdos e exercícios para ajudar seus alunos a se prepararem melhor para as provas!</p>
+            <p id="conteudos"><a href="/conteudo"> Postar Conteúdo</a></p>
+            <p id="conteudos"><a href="/acess"> Acessar Conteúdos</a></p>
+        <% } %>
+        <% if (typeof session !== 'undefined' && session.logado) { %>
         <h1>Aumente sua nota conosco!</h1>
         <p class="descrição">Você está acessando o RegiMath, um site focado assuntos de matemática que são ensinados no ensino médio.</p>
         <p class="descrição">Aqui você encontrará um explicação sobre o assunto desejado, e até poderá fazer simulados que usam questões das suas provas!</p>
@@ -31,6 +41,7 @@
            <button type="button" class="btn cancel" onclick="closeForm()">Fechar</button>
           </form>
         </div>
+        <% } %>
     </main>
     <footer>
       <p>&copy; 2025 Regimath. Todos os direitos reservados.</p>

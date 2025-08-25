@@ -1,16 +1,18 @@
-const lista = document.getElementById('listaPostagens');
-        const postagens = JSON.parse(localStorage.getItem('postagens')) || [];
-        if (postagens.length === 0) {
-            lista.innerHTML = '<p>Nenhuma postagem encontrada.</p>';
-        } else {
-            lista.innerHTML = postagens.map((p, i) => `
-                <div class="postagem">
-                    <h2>${p.titulo}</h2>
-                    <p><strong>Assunto:</strong> ${p.assunto}</p>
-                    <p><strong>Explicação:</strong> ${p.explicacao}</p>
-                    <p><strong>Exercícios:</strong> ${Array.isArray(p.exercicios) ? p.exercicios.map((ex, idx) => `<br>${idx+1}. ${ex}`).join('') : p.exercicios}</p>
-                    <p><em>${p.data}</em></p>
-                </div>
-                <hr>
-            `).join('');
-        }
+const lista = JSON.parse(localStorage.getItem('conteudos')) || [];
+    const container = document.getElementById('lista-cards');
+
+    if (lista.length === 0) {
+      container.innerHTML = "<p>Nenhum conteúdo publicado ainda.</p>";
+    } else {
+      lista.reverse().forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <h2>${item.titulo}</h2>
+          <p><strong>Assunto:</strong> ${item.assunto}</p>
+          <p>${item.explicacao.substring(0, 100)}...</p>
+          <a class="btn" href="/ver?id=${item.id}">Ver conteúdo</a>
+        `;
+        container.appendChild(card);
+      });
+    }

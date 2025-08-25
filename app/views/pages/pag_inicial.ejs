@@ -24,7 +24,7 @@
         <h2>Conteúdos</h2>
             <p id="conteudos"><a href="/acess"> Conteúdos</a></p>
         <div class="form-popup" id="myForm">
-          <form action="/logado" class="form-container" onsubmit="return register()">
+          <form action="/login" class="form-container" onsubmit="return register()">
            <h1>Login</h1>
 
            <label for="email"><b>Email</b></label>
@@ -33,6 +33,14 @@
            <label for="psw"><b>Password</b></label>
            <input type="password" placeholder="Enter Password" name="psw" id="psw">
 
+           <label for="tipo">Você é:</label>
+           <select id="tipo" name="tipo">
+           <option value="">Selecione</option>
+           <option value="aluno">Aluno</option>
+           <option value="professor">Professor</option>
+           </select>
+           <br>
+           <br> 
            <button type="submit" class="btn">Login</button>
            <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
            <p><a href="/register">Ainda não tem uma conta? Registre-se</a></p>
