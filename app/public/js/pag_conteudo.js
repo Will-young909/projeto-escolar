@@ -33,7 +33,6 @@ window.addEventListener('DOMContentLoaded', function() {
 // Função para validar o formulário
 function validarFormulario() {
     // Limpa mensagens e bordas anteriores
-    // Remove spans de erro do frontend e backend
     document.querySelectorAll('.erro-span, .erro').forEach(span => {
         if (span && span.parentNode) span.parentNode.removeChild(span);
     });
@@ -45,7 +44,6 @@ function validarFormulario() {
     const assunto = document.getElementById("Assunto");
     const titulo = document.getElementById("Titulo");
     const explicacao = document.getElementById("Explicacao");
-    // Valida campo principal de exercícios
     const exercicios = document.getElementById("Exercicios");
     if (!assunto.value.trim()) {
         showError(assunto, "Preencha o assunto.");
@@ -76,7 +74,35 @@ function validarFormulario() {
             valid = false;
         }
     });
-    return valid;
+    if (!valid) return false;
+
+    // Coleta todos os exercícios em um array
+    let listaExercicios = [exercicios.value];
+    exerciciosDinamicos.forEach(function(input) {
+        listaExercicios.push(input.value);
+    });
+
+    // Cria objeto da postagem
+    const novaPostagem = {
+        assunto: assunto.value,
+        titulo: titulo.value,
+        explicacao: explicacao.value,
+        exercicios: listaExercicios,
+        data: new Date().toLocaleString()
+    };
+
+    // Recupera postagens existentes
+    let postagens = JSON.parse(localStorage.getItem('postagens')) || [];
+    postagens.push(novaPostagem);
+
+    // Salva de volta
+    localStorage.setItem('postagens', JSON.stringify(postagens));
+
+    // Redireciona para /acess
+    window.location.href = '/acess';
+
+    // Impede envio do formulário para o backend
+    return false;
 }
 function showError(input, message) {
     const span = document.createElement('span');
