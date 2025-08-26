@@ -34,7 +34,7 @@
             <button class="login" type="submit">Postar</button>
             <br>
             <br>
-            <% if (typeof session !== 'undefined' && session.logado) { %>
+            <% if (typeof session !== 'undefined' && session.logado || session.professor){ %>
                 <p><a href="/logado">Voltar para a página inicial</a></p>
             <% } else { %>
                 <p><a href="/colab_pag">Voltar para a página inicial</a></p>

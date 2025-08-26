@@ -124,7 +124,7 @@ button {
   display: none;
   position: fixed;
   bottom: 100px;
-  right: -30px;
+  right: -3px;
   border-radius: 10px;
   z-index: 9;
 }

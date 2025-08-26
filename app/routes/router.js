@@ -136,9 +136,10 @@ function checkAluno(req, res, next) {
 }
 
 
-// Middleware para verificar se o usuário é professor ou aluno
+
+// Middleware para verificar se o usuário é professor, aluno ou colaborador
 function checkPerfil(req, res, next) {
-    if (!req.session.professor && !req.session.logado) {
+    if (!req.session.professor && !req.session.logado && !req.session.colaborador) {
         return res.redirect('/');
     }
     next();
