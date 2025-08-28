@@ -137,7 +137,7 @@ button {
 .form-popup {
   display: none;
   position: fixed;
-  bottom: 100px;
+  bottom: 30px;
   right: -30px;
   border-radius: 10px;
   z-index: 9;
