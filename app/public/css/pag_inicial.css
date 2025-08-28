@@ -1,3 +1,17 @@
+/* Espaço fixo para mensagens de erro nos formulários */
+.erro-area {
+    min-height: 22px;
+    display: block;
+    color: #fff;
+    font-size: 1.1em;
+    margin-top: 0.1em;
+    margin-bottom: 0.1em;
+    font-weight: bold;
+    border-radius: 10px;
+    padding: 2px 8px;
+    background-color: #ee3737;
+    box-sizing: border-box;
+}
 body {
     min-height: 100vh;
     /*background: #fffdf3;*/
@@ -124,7 +138,7 @@ button {
   display: none;
   position: fixed;
   bottom: 100px;
-  right: -3px;
+  right: -30px;
   border-radius: 10px;
   z-index: 9;
 }
@@ -140,8 +154,8 @@ button {
 .form-popup_premium {
   display: none;
   position: fixed;  
-  bottom: 250px;
-  right: 30px;
+  bottom: 50px;
+  right: -10px;
   z-index: 9;
 }
 
@@ -160,10 +174,10 @@ button {
   text-align: center;  
   color: gold;
   max-width: 300px;
-  height: 450px;
+  height: 450px auto;
   padding: 20px;
   background-color: rgb(228, 38, 38);
-  border: 2px solid black;
+  border: 2px solid #ee3737;
   border-radius: 10px;
 }
 
@@ -194,7 +208,7 @@ button {
 
 .btn {
     font-size: 1.1875em;
-    border: solid 2px #000;
+    border: solid 2px #ee3737;
     border-radius: 20px;
     width: 99px;
     margin: 0 20px 10px 0;
@@ -295,4 +309,14 @@ select:hover, select:focus {
     cursor: pointer;
     border-color: #98FB98;
     outline: none;
+}
+
+@media screen and (min-width: 1000px) {
+  .form-container_premium {
+    height: auto;
+    position: fixed;
+    bottom: 150px;
+    right: 30px;
+  }
+    
 }

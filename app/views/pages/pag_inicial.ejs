@@ -9,7 +9,7 @@
 </head>
 <body>
     <header>
-        <img src="../imagens/Regimath_branco2.png" alt="Logo do Regimath">
+        <img src="../imagens/Regimath_sem fundo cor branco2.png" alt="Logo do Regimath">
         <nav class="menu">
             <ul>
                 <li><a href="/register">Registrar-se</a></li>
@@ -27,11 +27,15 @@
           <form action="/login" class="form-container" onsubmit="return register()">
            <h1>Login</h1>
 
+
            <label for="email"><b>Email</b></label>
            <input type="text" placeholder="Enter Email" name="email" id="email">
+           <div class="erro-area" id="erro-email"></div>
+
 
            <label for="psw"><b>Password</b></label>
            <input type="password" placeholder="Enter Password" name="psw" id="psw">
+           <div class="erro-area" id="erro-psw"></div>
 
            <label for="tipo">Você é:</label>
            <select id="tipo" name="tipo">
@@ -39,6 +43,7 @@
            <option value="aluno">Aluno</option>
            <option value="professor">Professor</option>
            </select>
+           <div class="erro-area" id="erro-tipo"></div>
            <br>
            <br> 
            <button type="submit" class="btn">Login</button>

@@ -42,17 +42,18 @@ function atualizarTipo(select) {
 }
 
 
-    function adicionarAlternativa(btn) {
-      const container = btn.parentElement.querySelector('.lista-alternativas');
-      const div = document.createElement('div');
-      div.innerHTML = `
-        <input type="text" class="alternativa" placeholder="Texto da alternativa">
-        <label>
-          <input type="radio" name="correta-${exercicioId}" class="correta"> Correta
-        </label>
-      `;
-      container.appendChild(div);
-    }
+
+function adicionarAlternativa(btn) {
+  const container = btn.parentElement.querySelector('.lista-alternativas');
+  const div = document.createElement('div');
+  div.style.display = 'flex';
+  div.style.alignItems = 'center';
+  div.innerHTML = `
+    <input type="text" class="alternativa" placeholder="Texto da alternativa">
+    <input type="radio" name="correta-${exercicioId}" class="correta" style="margin-left:8px;"> <span style="font-size:0.95em; color:#333; margin-left:2px;">Correta</span>
+  `;
+  container.appendChild(div);
+}
 
 
 
@@ -69,20 +70,24 @@ document.getElementById('form-conteudo').addEventListener('submit', function(e) 
   const assunto = document.getElementById('Assunto');
   const explicacao = document.getElementById('Explicacao');
   if (!titulo.value.trim()) {
-    showError(titulo, 'Preencha o título.');
+    showErrorArea('erro-titulo', 'Preencha o título.');
     setErrorBorder(titulo);
     valid = false;
   }
   if (!assunto.value.trim()) {
-    showError(assunto, 'Preencha o assunto.');
+    showErrorArea('erro-assunto', 'Preencha o assunto.');
     setErrorBorder(assunto);
     valid = false;
   }
   if (!explicacao.value.trim()) {
-    showError(explicacao, 'Preencha a explicação.');
+    showErrorArea('erro-explicacao', 'Preencha a explicação.');
     setErrorBorder(explicacao);
     valid = false;
   }
+function showErrorArea(areaId, message) {
+  const area = document.getElementById(areaId);
+  if (area) area.textContent = message;
+}
 
   // Validação dos exercícios
   const exerciciosDivs = Array.from(document.querySelectorAll('.exercicio'));

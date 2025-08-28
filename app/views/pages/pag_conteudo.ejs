@@ -24,8 +24,11 @@
         <div class="container">
           <form method="post" action="/conteudo" id="form-conteudo">
           <input type="text" id="Titulo" placeholder="  Título">
+          <div class="erro-area" id="erro-titulo"></div>
           <input type="text" id="Assunto" placeholder="  Assunto">
+          <div class="erro-area" id="erro-assunto"></div>
           <input type="text" id="Explicacao" placeholder="  Explicação">
+          <div class="erro-area" id="erro-explicacao"></div>
           <h3>Exercícios</h3>
           <div id="Exercicios"></div>
            <button type="button" onclick="adicionarExercicio()">+ Adicionar Exercício</button>
@@ -34,7 +37,7 @@
             <button class="login" type="submit">Postar</button>
             <br>
             <br>
-            <% if (typeof session !== 'undefined' && session.logado || session.professor){ %>
+            <% if (typeof session !== 'undefined' && session.logado) { %>
                 <p><a href="/logado">Voltar para a página inicial</a></p>
             <% } else { %>
                 <p><a href="/colab_pag">Voltar para a página inicial</a></p>

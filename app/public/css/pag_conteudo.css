@@ -1,154 +1,168 @@
+/* Espaço fixo para mensagens de erro nos formulários */
+.erro-area {
+  min-height: 22px;
+  display: block;
+  color: #fff;
+  font-size: 1.5em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+  font-weight: bold;
+  border-radius: 10px;
+  padding: 2px 8px;
+  background-color: #ee3737;
+  box-sizing: border-box;
+}
 body {
-    font: 0.8em sans-serif;
+  font: 0.8em sans-serif;
+  background-color: #ee3737;
+  color: #333;
+}
+
+.exercicio {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  margin-bottom: 20px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  padding: 16px;
+}
+
+.exercicio input,
+.exercicio select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 1em;
+}
+
+.alternativas {
+  margin-top: 8px;
+}
+
+body {
     background-color: #ee3737;
-    color: #333;
-  }
-  
-  .exercicio {
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
+    margin: 0;/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Container central */
+.container {
+  max-width: 400px;
+  height: auto;
+  margin: auto;
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  animation: fadeIn 0.6s ease-in-out;
+}
+
+/* Títulos */
+h1, h2, h3, h4 {
+  margin-bottom: 15px;
+  color: #2c3e50;
+}
+
+input {
+    font-size: 1.1875em;
+    color: #404040;
+    padding: 1rem 0 0.5rem 0;
+    border: solid 5px #000;
+    border-radius: 20px;
     width: 100%;
-    margin-bottom: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-    padding: 16px;
-  }
-  
-  .exercicio input,
-  .exercicio select {
+    align-self: flex-start;
+    border-color: #a0a0a0;
+    border-bottom-width: 2px;
+    background-color: #f2f3f4;
+    margin-bottom: 0rem;
+    margin-top: 1rem;
+    transition: 0.15s linear;
+}
+input:focus {
+    outline: none;
+    border-color: #98FB98;
+    transition: transform 0.3s ease;
+}
+
+/* Botões */
+button,
+.btn {
+  background-color: #ee3737;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #f04646;
+  transform: scale(1.05);
+}
+
+/* Exercícios */
+.exercicio {
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #fafafa;
+}
+
+.exercicio img {
+  max-width: 100%;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+
+/* Animação suave */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+} }
+
+header {
     width: 100%;
-    box-sizing: border-box;
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 6px;
-    font-size: 1em;
-  }
-  
-  .alternativas {
-    margin-top: 8px;
-  }
-  
-  body {
-      background-color: #ee3737;
-      margin: 0;/* Reset básico */
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Container central */
-  .container {
-    max-width: 400px;
-    height: auto;
-    margin: auto;
-    background: white;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    animation: fadeIn 0.6s ease-in-out;
-  }
-  
-  /* Títulos */
-  h1, h2, h3, h4 {
-    margin-bottom: 15px;
-    color: #2c3e50;
-  }
-  
-  input {
-      font-size: 1.1875em;
-      color: #404040;
-      padding: 1rem 0 0.5rem 0;
-      border: solid 5px #000;
-      border-radius: 20px;
-      width: 100%;
-      align-self: flex-start;
-      border-color: #a0a0a0;
-      border-bottom-width: 2px;
-      background-color: #f2f3f4;
-      margin-bottom: 0rem;
-      margin-top: 1rem;
-      transition: 0.15s linear;
-  }
-  input:focus {
-      outline: none;
-      border-color: #98FB98;
-      transition: transform 0.3s ease;
-  }
-  
-  /* Botões */
-  button,
-  .btn {
-    background-color: #ee3737;
-    color: white;
-    border: none;
-    padding: 10px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-  }
-  
-  button:hover,
-  .btn:hover {
-    background-color: #f04646;
-    transform: scale(1.05);
-  }
-  
-  /* Exercícios */
-  .exercicio {
-    margin-bottom: 30px;
-    padding: 15px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: #fafafa;
-  }
-  
-  .exercicio img {
-    max-width: 100%;
-    margin-top: 10px;
-    border-radius: 6px;
-  }
-  
-  /* Animação suave */
-  @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  } }
-  
-  header {
-      width: 100%;
-      padding: 0 10px;
-      display: grid;
-      text-align: center;
-      text-decoration:underline;
-      justify-content: center;
-      background-color: #f2f3f4;
-      font-size: larger;
-      border: solid 5px aquamarine;
-      border-radius: 0 0 20px 20px;
-      box-shadow: 0 0 1.8rem 1rem rgba(0, 0, 0, 0.15);
-  }
-  
-  a {
-      color: #8d3dc8;
-      text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 600;
-      transition: 0.3s linear;
-  }
-  a:hover, a:focus {
-      outline: none;
-      color: #8d3dc8;
-  }
-  a:focus {
-      text-decoration: underline;
-  }
-  a:first-of-type {
-      margin-top: 3rem;
-  }
-  a + a {
-      margin-top: 1.125rem;
-  }
+    padding: 0 10px;
+    display: grid;
+    text-align: center;
+    text-decoration:underline;
+    justify-content: center;
+    background-color: #f2f3f4;
+    font-size: larger;
+    border: solid 5px aquamarine;
+    border-radius: 0 0 20px 20px;
+    box-shadow: 0 0 1.8rem 1rem rgba(0, 0, 0, 0.15);
+}
+
+a {
+    color: #8d3dc8;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 600;
+    transition: 0.3s linear;
+}
+a:hover, a:focus {
+    outline: none;
+    color: #8d3dc8;
+}
+a:focus {
+    text-decoration: underline;
+}
+a:first-of-type {
+    margin-top: 3rem;
+}
+a + a {
+    margin-top: 1.125rem;
+}
